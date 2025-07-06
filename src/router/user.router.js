@@ -35,9 +35,7 @@ import UserController from "../controller/user.controller.js";
 const UserRouter = Router();
 const controller = new UserController();
 
-UserRouter.post("/auth/register", (req, res) => controller.RegisterController(req, res));
-UserRouter.post("/auth/login", (req, res) => controller.LoginController(req, res));
+UserRouter.post("/auth/register", (req, res,next) => controller.registerController(req, res,next));
+UserRouter.post("/auth/login", (req, res) => controller.loginController(req, res));
 
 export default UserRouter;
-
-

@@ -25,6 +25,11 @@ import UserRouter from "./user.router.js";
 // export default Routers;
 
 
-const Routers = () => [UserRouter];
+// const Routers = () => [UserRouter];
 
+// export default Routers;
+
+
+
+const Routers = () => [UserRouter];
 export default Routers;

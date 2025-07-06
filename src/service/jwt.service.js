@@ -77,47 +77,25 @@
 
 
 
-// import jwt from "jsonwebtoken";
-// import CustomerError from "../utils/customer.error.js";
-
-// class JwtService {
-//     constructor() {};
-//     async  validateAuthRegister() {
-//         const token = jwt.sign({userid: userId}, "20061214alone.M", {
-//             expiresIn: "10m"
-//         });
-//         return token;
-//     };
-//     async validateAuthLogin() {
-//         try {
-//             const payload = jwt.verify(token, "20061214alone.M");
-//             return payload;
-//         } catch (error) {
-//             throw new CustomerError (error.message);
-//         };
-//     };
-// };
-
-// export default JwtService;
-
 import jwt from "jsonwebtoken";
-import customerError from "../utils/customer.error.js";
+import CustomerError from "../utils/customer.error.js";
 
 class JwtService {
     constructor() {};
-    async validateAuthRegister() {
+    async  validateAuthRegister() {
         const token = jwt.sign({userid: userId}, "20061214alone.M", {
             expiresIn: "10m"
         });
         return token;
     };
     async validateAuthLogin() {
-      try {
-        const payload = jwt.verify(token, "20061214alone.M");
-        return payload;
-      } catch (error) {
-        throw new customerError(error.message);
-      }  
+        try {
+            const payload = jwt.verify(token, "20061214alone.M");
+            return payload;
+        } catch (error) {
+            throw new CustomerError (error.message);
+        };
     };
 };
+
 export default JwtService;

@@ -70,23 +70,32 @@ import UserService from "../service/user.service.js";
 
 // export default UserController;
 
+import UserService from "../service/user.service.js";
 
 class UserController {
     constructor() {
-        this.UserService = new UserService();
+        this.userService = new UserService();
     };
-    async RegisterController(req, res, next) {
+
+    async registerController(req, res, next) {
         try {
-        const body = req.body;
-        const token = await this.UserService.RegisterService(body);
-        res.status(201).json(token);
-    } catch (error) {
-        next(error);   
+            const body = req.body;
+            const token = await this.userService.registerService(body);
+            res.status(201).json(token);
+        } catch (error) {
+            next(error);   
+        }
     };
+
+    async loginController(req, res, next) {
+        try {
+            const body = req.body;
+            const token = await this.userService.loginService(body);
+            res.status(200).json(token);
+        } catch (error) {
+            next(error);
+        }
     };
 };
-export default UserService;
 
-console.log("Git hubdan salom");
-
-console.log("Visual Studio Code dan alik");
+export default UserController;

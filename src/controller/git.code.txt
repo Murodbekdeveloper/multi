@@ -4,7 +4,7 @@ ls
 git status
 git commit -m "return file"
 git remote add origin http url
-git remove -v
+git remote -v
 git push origin main
 
-git pull origin main
+git pull origin

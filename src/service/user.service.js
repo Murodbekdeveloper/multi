@@ -80,18 +80,29 @@ class UserService {
         this.JwtService = new JwtService;
         this.JoiService = new JoiService;
         this.Repository = UserSchema;
+        this.userRepo = dataSource.getRepository(UserSchema)
     };
     async RegisterService(body) {
         await this.JoiService.validateAuthRegister(body);
-        const query = database.getRepository("Tajriba");
-        const existed = await query.find({username: body.username});
-        if(existed) throw new CustomerError("Username already been existed");
-        const hashedToken = await bcrypt.hash(body.password, 12);
-        const user = query.create({ ...body, password: hashedToken});
-        await query.save(user);
-        const token = await this.JoiService.validateAuthRegister(user.id);
-        return token;
+        
+        const existed = await this.userRepo.findOne({where: {username: body.username}});
+        if(existed) throw new CustomerError("Username already exists", 400); // 500 -> 400, chunki bu foydalanuvchi nomi borligi bilan bog'liq.
+    
+        const hashedPassword = await bcrypt.hash(body.password, 12);
+        const user = this.userRepo.create({ ...body, password: hashedPassword });
+        await this.userRepo.save(user);
+    
+        try {
+            const token = await this.JwtService.generateToken(user.id); // JoiService -> JwtService
+            return token;
+        } catch (error) {
+            throw new CustomerError(error.message, 401);
+        }
     }
+    
 };
 
 export default UserService;
+
+
+

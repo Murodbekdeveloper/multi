@@ -71,19 +71,38 @@
 
 
 
+// import typeorm from "typeorm";
+
+// const database = new typeorm.DataSource({
+//     type: "postgres",
+//     host: "localhost",
+//     database: "tortinchidars",
+//     username: "postgres",
+//     port: 5432,
+//     password: "20061214alone.M",
+//     autoLoadEntities: true,
+//     logging: true,
+//     synchronize: true,
+//     entities: [process.cwd() + "/**/*.entity{.js}"]
+// });
+
+// export const dataSource = await database.initialize();
+
+
+
 import typeorm from "typeorm";
 
 const database = new typeorm.DataSource({
     type: "postgres",
     host: "localhost",
-    database: "tortinchidars",
-    username: "postgres",
     port: 5432,
+    username: "postgres",
     password: "20061214alone.M",
-    autoLoadEntities: true,
-    logging: true,
+    database: "kings",
     synchronize: true,
-    entities: [process.cwd() + "/**/*.entity{.js}"]
+    logging: true,
+    autoLoadEntities: true, 
+    entities: [process.cwd() + "/src/**/*.entity.js"] 
 });
 
 export const dataSource = await database.initialize();

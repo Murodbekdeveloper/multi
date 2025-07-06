@@ -47,42 +47,23 @@
 
 
 
-// import Joi from "joi";
-
-// class JoiService {
-//     async validateAuthRegister(body) {
-//         const token = Joi.object({
-//             username: Joi.string().min(5).max(34).required(),
-//             password: Joi.string().min(4).max(24).required()
-//         });
-//         await token.validateAsync(body);
-//     };
-//     async validateAuthLogin(body) {
-//         const token = Joi.object({
-//             username: Joi.string().min(4).max(43).required(),
-//             password: Joi.string().min(4).max(53).required(),
-//         });
-//         await token.validateAsync(body);
-//     };
-// };
-
-// export default JoiService;
-
 import Joi from "joi";
+
 class JoiService {
     async validateAuthRegister(body) {
         const token = Joi.object({
-            username: Joi.string().min(3).max(32).required(),
-            password: Joi.string().min(3).max(43).required()
-        })
-        await token.validateAsync(body)
+            username: Joi.string().min(5).max(34).required(),
+            password: Joi.string().min(4).max(24).required()
+        });
+        await token.validateAsync(body);
     };
     async validateAuthLogin(body) {
         const token = Joi.object({
-            username: Joi.string().min(5).max(53).required(),
-            password: Joi.string().min(4).max(32).required()
+            username: Joi.string().min(4).max(43).required(),
+            password: Joi.string().min(4).max(53).required(),
         });
         await token.validateAsync(body);
     };
 };
+
 export default JoiService;
